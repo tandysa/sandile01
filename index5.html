@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zulu Smart Reply V5</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
+    textarea { width: 85%; height: 110px; margin: 10px; }
+    button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+    .output { margin-top: 20px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Smart Reply (Your Style)</h1>
+  <p>Faka umlayezo → impendulo ifane nawe</p>
+
+  <textarea id="inputMessage" placeholder="Bhala umlayezo..."></textarea><br>
+  <button onclick="generateReply()">Phendula</button>
+
+  <div class="output" id="output"></div>
+
+  <script>
+    function generateReply() {
+      const msg = document.getElementById("inputMessage").value.toLowerCase();
+      let replies = ["Alright bbe ngizokutshela later, ngibambekile kancane 🥹"];
+
+      if (msg.includes("uphi")) {
+        replies = [
+          "Ngikhona nje bbe kodwa ngibambekile kancane, ngizokutshela 🥹",
+          "Ngisakhona nje kodwa busy bbe, ngizokuphendula later ❤️",
+          "Ngaphandle kancane bbe, ngizokutshela nje Mncwaaa ❤️"
+        ];
+      } else if (msg.includes("wenza")) {
+        replies = [
+          "Ngise busy nje manje bbe, ngizokutshela 🥹",
+          "Ngiyafunda la bbe kodwa ngizokuphendula ❤️",
+          "Ngisazama ukuqeda izinto bbe, ngizobuya kuwe 🥹"
+        ];
+      } else if (msg.includes("hey") || msg.includes("hi")) {
+        replies = [
+          "Yebo bbe ngiyakubona 🥹❤️",
+          "Hey bbe, ngikhona kodwa busy kancane 🥹",
+          "Sawubona s'thandwa, ngizokuphendula manje nje ❤️"
+        ];
+      } else if (msg.includes("ngikukhumbule") || msg.includes("miss")) {
+        replies = [
+          "Nami ngik'khumbule bbe 🥹❤️",
+          "Mncwaaa Mncwaaa bbe ngiyakukhumbula ❤️",
+          "Ngikukhumbule nami s'thandwa sami 🥹"
+        ];
+      }
+
+      const randomReply = replies[Math.floor(Math.random() * replies.length)];
+      document.getElementById("output").innerText = randomReply;
+    }
+  </script>
+</body>
+</html>
