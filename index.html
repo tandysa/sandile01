@@ -1,24 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zu">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sandile Web</title>
+  <title>Zulu Smart Reply</title>
   <style>
-    body { font-family: Arial, sans-serif; text-align: center; margin-top: 100px; }
-    h1 { color: #333; }
-    p { color: #555; }
+    body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
+    textarea { width: 80%; height: 100px; margin: 10px; }
     button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+    .output { margin-top: 20px; font-weight: bold; }
   </style>
 </head>
 <body>
-  <h1>Welcome Sandile 👋</h1>
-  <p>This is your first web project created using ChatGPT + GitHub.</p>
-  <button onclick="showMessage()">Click Me</button>
+  <h1>Zulu Smart Reply Assistant 🇿🇦</h1>
+  <p>Faka umlayezo → uthole impendulo ngokuzenzakalela</p>
+
+  <textarea id="inputMessage" placeholder="Bhala umlayezo lapha..."></textarea><br>
+  <button onclick="generateReply()">Thola Impendulo</button>
+
+  <div class="output" id="output"></div>
 
   <script>
-    function showMessage() {
-      alert("You just ran your first web app 🚀");
+    function generateReply() {
+      const msg = document.getElementById("inputMessage").value.toLowerCase();
+      let reply = "Ngizokuphendula maduze.";
+
+      if (msg.includes("uphi")) {
+        reply = "Ngisabambekile kancane, ngizokutshela nje.";
+      } else if (msg.includes("wenza")) {
+        reply = "Ngisabhekene nezinto manje, ngizokuphendula kahle.";
+      } else if (msg.includes("hey") || msg.includes("hi")) {
+        reply = "Yebo ngiyakubona, ngizokuphendula nje.";
+      }
+
+      document.getElementById("output").innerText = reply;
     }
   </script>
 </body>
