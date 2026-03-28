@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zulu Smart Reply</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; margin: 50px; }
+    textarea { width: 80%; height: 100px; margin: 10px; }
+    button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+    .output { margin-top: 20px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Zulu Smart Reply Assistant</h1>
+  <p>Faka umlayezo → uthole impendulo ngokuzenzakalela</p>
+
+  <textarea id="inputMessage" placeholder="Bhala umlayezo lapha..."></textarea><br>
+  <button onclick="generateReply()">Thola Impendulo</button>
+
+  <div class="output" id="output"></div>
+
+  <script>
+    function generateReply() {
+      const msg = document.getElementById("inputMessage").value.toLowerCase();
+      let reply = "Ngizokuphendula maduze.";
+
+      if (msg.includes("uphi")) {
+        reply = "Ngisabambekile kancane, ngizokutshela nje.";
+      } else if (msg.includes("wenza")) {
+        reply = "Ngisabhekene nezinto manje, ngizokuphendula kahle.";
+      } else if (msg.includes("hey") || msg.includes("hi")) {
+        reply = "Yebo ngiyakubona, ngizokuphendula nje.";
+      }
+
+      document.getElementById("output").innerText = reply;
+    }
+  </script>
+</body>
+</html>
