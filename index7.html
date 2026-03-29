@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Reply V7</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    textarea { width: 100%; height: 120px; margin-bottom: 10px; }
+    button { padding: 10px; margin: 5px; }
+    .output { margin-top: 15px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h2>Smart Reply Assistant</h2>
+
+  <textarea id="inputMessage" placeholder="Paste WhatsApp message..."></textarea>
+  <br>
+  <button onclick="generateReply()">Generate Reply</button>
+  <button onclick="copyReply()">Copy Reply</button>
+
+  <div class="output" id="output"></div>
+
+  <script>
+    function generateReply() {
+      const msg = document.getElementById("inputMessage").value.toLowerCase();
+      let replies = ["Alright bbe ngizokutshela later, ngibambekile 🥹"];
+
+      if (msg.includes("uphi")) {
+        replies = [
+          "Ngikhona nje bbe kodwa ngibambekile, ngizokutshela 🥹",
+          "Ngisakhona kodwa busy kancane, ngizokuphendula ❤️"
+        ];
+      } else if (msg.includes("wenza")) {
+        replies = [
+          "Ngise busy nje manje bbe, ngizokutshela 🥹",
+          "Ngiyasebenza la kodwa ngizokuphendula ❤️"
+        ];
+      }
+
+      const reply = replies[Math.floor(Math.random() * replies.length)];
+      document.getElementById("output").innerText = reply;
+    }
+
+    function copyReply() {
+      const text = document.getElementById("output").innerText;
+      navigator.clipboard.writeText(text);
+      alert("Copied ✅");
+    }
+  </script>
+</body>
+</html>
