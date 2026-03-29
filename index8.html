@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Reply V8</title>
+  <style>
+    body { font-family: Arial; background:#e5ddd5; margin:0; }
+    .chat { max-width:400px; margin:20px auto; background:#fff; border-radius:10px; padding:10px; }
+    .msg { padding:10px; margin:5px; border-radius:10px; }
+    .incoming { background:#eee; text-align:left; }
+    .outgoing { background:#dcf8c6; text-align:right; }
+    textarea { width:100%; height:80px; margin-top:10px; }
+    button { padding:10px; margin-top:5px; width:100%; }
+  </style>
+</head>
+<body>
+  <div class="chat">
+    <div id="chatBox"></div>
+
+    <textarea id="inputMessage" placeholder="Type or paste message..."></textarea>
+    <button onclick="generateReply()">AI Reply</button>
+    <button onclick="copyReply()">Copy Last Reply</button>
+  </div>
+
+  <script>
+    let lastReply = "";
+
+    async function generateReply() {
+      const msg = document.getElementById("inputMessage").value;
+
+      addMessage(msg, "incoming");
+
+      // ⚠️ Put your API key here TEMPORARILY (do NOT upload with it)
+      const API_KEY = "PASTE_API_KEY_TEMP";
+
+      const res = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + API_KEY
+        },
+        body: JSON.stringify({
+          model: "gpt-4o-mini",
+          messages: [
+            { role: "system", content: "Reply like a young Zulu guy, mix isiZulu + English, casual tone, use bbe, mncwa, emojis 🥹❤️" },
+            { role: "user", content: msg }
+          ]
+        })
+      });
+
+      const data = await res.json();
+      const reply = data.choices?.[0]?.message?.content || "Error";
+
+      lastReply = reply;
+      addMessage(reply, "outgoing");
+    }
+
+    function addMessage(text, type) {
+      const div = document.createElement("div");
+      div.className = "msg " + type;
+      div.innerText = text;
+      document.getElementById("chatBox").appendChild(div);
+    }
+
+    function copyReply() {
+      if (!lastReply) return alert("No reply yet");
+      navigator.clipboard.writeText(lastReply);
+      alert("Copied ✅");
+    }
+  </script>
+</body>
+</html>
